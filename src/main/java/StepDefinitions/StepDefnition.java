@@ -24,15 +24,11 @@ public class StepDefnition extends CommonFunctions {
         System.setProperty("webdriver.chrome.driver", "D:\\Selenium\\SeleniumJars\\chromedriver.exe");
         driver = new ChromeDriver();
 
-      /*  System.setProperty("webdriver.gecko.driver", "D:\\Selenium\\SeleniumJars\\Firefox and Gecko\\geckodriver.exe");
-        driver = new FirefoxDriver();*/
-
         String baseURL = "https://www.emirates.com/ae/english/";
 
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
-        //driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-
+        
         driver.get(baseURL);
 
     }
@@ -42,12 +38,12 @@ public class StepDefnition extends CommonFunctions {
 
         String searchingText = "London Heathrow Airport (LHR), London, United Kingdom";
         String partialText = "LHR";
-
-        WebElement text = waitForElement(By.name("Arrival airport"), 20);
-        text.clear();
-
+        
+        Thread.sleep(5000);
+        WebElement text = waitForElement(By.xpath("(//input[@name='Arrival airport'])[1]"), 20);
         text.sendKeys("LHR");
-        Thread.sleep(3000);
+        
+        Thread.sleep(5000);
         WebElement element =driver.findElement(By.xpath("//ol[@class='location__list']"));
 
         List<WebElement> results = element.findElements(By.tagName("li"));
