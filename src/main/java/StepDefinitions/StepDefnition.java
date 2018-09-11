@@ -2,15 +2,9 @@ package StepDefinitions;
 
 import cucumber.api.java.en.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.security.Key;
 import java.util.List;
 
 import static StepDefinitions.CommonFunctions.waitForElement;
@@ -28,7 +22,7 @@ public class StepDefnition extends CommonFunctions {
 
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
-        
+
         driver.get(baseURL);
 
     }
@@ -38,13 +32,13 @@ public class StepDefnition extends CommonFunctions {
 
         String searchingText = "London Heathrow Airport (LHR), London, United Kingdom";
         String partialText = "LHR";
-        
+
         Thread.sleep(5000);
         WebElement text = waitForElement(By.xpath("(//input[@name='Arrival airport'])[1]"), 20);
         text.sendKeys("LHR");
-        
+
         Thread.sleep(5000);
-        WebElement element =driver.findElement(By.xpath("//ol[@class='location__list']"));
+        WebElement element =driver.findElement(By.xpath("//div[@class='widget__panel js-widget-panel panel-active']//div[@data-data-set='destinations']//ol[@class='location__list']"));
 
         List<WebElement> results = element.findElements(By.tagName("li"));
 
@@ -56,6 +50,11 @@ public class StepDefnition extends CommonFunctions {
             }
         }
 
+        /*Or use the below to Just click
+        WebElement firstElement = driver.findElement(By.xpath("//div[@class='widget__panel js-widget-panel panel-active']//div[@data-data-set='destinations']//ol[@class='location__list']//li[@class='location__item js-dropdown-select-item highlight js-location-list']"));
+        firstElement.click();*/
+
+
         //Click on Calendar
         waitForElement(By.xpath(".//*[@id='search-flight-date-picker--depart']"), 20).click();
 
@@ -65,10 +64,8 @@ public class StepDefnition extends CommonFunctions {
         waitForElement(By.xpath(".//*[@id='panel0']/div/div/div/div[2]/section/div[4]/div[1]/div[3]/eol-datefield/eol-calendar/div/div/div[2]/table/tbody/tr[3]/td[7]/a"), 20).click();
         //Click on submit using below.
         waitForElement(By.xpath(".//*[@id='panel0']/div/div/div/div[2]/section/div[4]/div[2]/div[3]/form/button"), 20).click();
-
-
+        
         System.out.println("Arrival Airport set to LHR");
-
 
     }
 
@@ -81,8 +78,7 @@ public class StepDefnition extends CommonFunctions {
         String price = waitForElement(By.xpath("//span[@class='carrier-imposed-curr carrier-imposed-span']"), 20).getText();
 
         System.out.println("Price : " + price);
-
-
+        
     }
 
 }
