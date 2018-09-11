@@ -34,7 +34,7 @@ public class StepDefnition extends CommonFunctions {
         String partialText = "LHR";
 
         Thread.sleep(5000);
-        WebElement text = waitForElement(By.xpath("(//input[@name='Arrival airport'])[1]"), 20);
+        WebElement text = waitForElement(By.xpath("//div[@class='widget__panel js-widget-panel panel-active']//input[@name='Arrival airport']"), 20);
         text.sendKeys("LHR");
 
         Thread.sleep(5000);
